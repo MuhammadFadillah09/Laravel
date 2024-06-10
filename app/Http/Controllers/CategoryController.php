@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Controllers/CategoryController.php
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -22,10 +21,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required',
         ]);
 
-        Category::create($request->only('name'));
+        Category::create($request->all());
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
@@ -38,10 +37,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required',
         ]);
 
-        $category->update($request->only('name'));
+        $category->update($request->all());
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
@@ -52,6 +51,7 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
+
+    
+
 }
-
-
